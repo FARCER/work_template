@@ -1,6 +1,9 @@
 // Подключаем стили библиотек
 @import '_libs.styl'
 
+// Подключаем переменные
+@import '_vars.styl'
+
 // Подключаем спрайты (просто раскоментируем импорт при появлении PNG спрайтов)
 // @import '_sprite.styl'
 
@@ -81,13 +84,20 @@ button
   width 100%
   max-width 1000px
   margin 0 auto
-  
+
+
+
+// Общие стили
+@import '_common_styles.styl'
+
 // Стили шапки
 @import 'modules/_header.styl'
 
+// Стили шапки
+@import 'modules/_menu.styl'
+
+// Стили главной страницы
+@import 'page/_index.styl'
+
 // Стили футера
 @import 'modules/_footer.styl'
-
-
-// Стили футера
-@import 'page/_index.styl'
