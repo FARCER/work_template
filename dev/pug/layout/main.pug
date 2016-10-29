@@ -1,0 +1,19 @@
+doctype html
+html(lang="ru-RU")
+	head
+		meta(charset="utf-8")
+		meta(http-equiv='X-UA-Compatible', content="IE = edge")
+		meta(name="viewport" content="width=device-width,initial-scale=1")
+		meta(name="keywords" content="")
+		link(rel="stylesheet" type='text/css' href="static/fonts/fonts.css")
+		link(rel="stylesheet" type='text/css' href="static/css/main.min.css")
+
+		title
+			block title
+	body
+		.wrapper
+			include ../modules/header
+			block content
+		include ../modules/footer
+		script(src="static/js/scripts.min.js")
+
