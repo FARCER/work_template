@@ -23,6 +23,7 @@ gulp.task('stylus', function() {
         ])
         .pipe(plumber())
         .pipe(stylus({
+            'include css': true,
             compress: true
         }))
 
@@ -56,7 +57,7 @@ gulp.task('browsersync', function() {
         server: {
             baseDir: 'dev'
         },
-    })
+    });
 });
 
 // Работа с JS
@@ -66,7 +67,6 @@ gulp.task('scripts', function() {
             'dev/static/libs/jquery/jquery.js',
             'dev/static/libs/magnific/jquery.magnific-popup.min.js',
             'dev/static/libs/bxslider/jquery.bxslider.min.js',
-            // 'dev/static/libs/animate/animate-css.js',
             'dev/static/libs/validate/jquery.validate.min.js',
             // Свои файлы
             'dev/static/js/main.js'
@@ -97,7 +97,7 @@ gulp.task('spritemade', function() {
             algorithm: 'binary-tree',
             cssTemplate: 'stylus.template.mustache',
             cssVarMap: function(sprite) {
-                sprite.name = 's-' + sprite.name
+                sprite.name = 's-' + sprite.name;
             }
         }));
 
@@ -126,30 +126,30 @@ gulp.task('img', function() {
             use: [pngquant()]
 
         })))
-        .pipe(gulp.dest('product/static/img'))
+        .pipe(gulp.dest('product/static/img'));
 });
 
 // Сборка проекта
 
 gulp.task('build', ['clean', 'img', 'stylus', 'scripts'], function() {
     var buildCss = gulp.src('dev/static/css/*.css')
-        .pipe(gulp.dest('product/static/css'))
+        .pipe(gulp.dest('product/static/css'));
 
     var buildFonts = gulp.src('dev/static/fonts/**/*')
-        .pipe(gulp.dest('product/static/fonts'))
+        .pipe(gulp.dest('product/static/fonts'));
 
     var buildJs = gulp.src('dev/static/js/scripts.min.js')
-        .pipe(gulp.dest('product/static/js'))
+        .pipe(gulp.dest('product/static/js'));
 
     var buildHtml = gulp.src('dev/*.html')
-        .pipe(gulp.dest('product/'))
+        .pipe(gulp.dest('product/'));
 
     var buildImg = gulp.src('dev/static/img/sprite/sprite.png')
         .pipe(imagemin({
             progressive: true,
             use: [pngquant()]
         }))
-        .pipe(gulp.dest('product/static/img/sprite/'))
+        .pipe(gulp.dest('product/static/img/sprite/'));
 });
 
 // Очистка кеша
