@@ -27,12 +27,14 @@ gulp.task('stylus', function() {
             compress: true
         }))
 
-    .on("error", notify.onError({
-            message: "Ошибка в Stylus",
-            title: "Ошибка в Stylus"
+
+    .on("error", notify.onError(function(error) {
+            return "Message to the notifier: " + error.message;
         }))
         .pipe(autoprefixer(['last 2 version']))
-        .pipe(rename({ suffix: '.min' }))
+        .pipe(rename({
+            suffix: '.min'
+        }))
         .pipe(gulp.dest('dev/static/css'))
         .pipe(browsersync.reload({
             stream: true
@@ -44,9 +46,8 @@ gulp.task('pug', function() {
     return gulp.src('dev/pug/pages/*.pug')
         .pipe(plumber())
         .pipe(pug())
-        .on("error", notify.onError({
-            message: "Ошибка в Pug",
-            title: "Ошибка в Pug"
+        .on("error", notify.onError(function(error) {
+            return "Message to the notifier: " + error.message;
         }))
         .pipe(gulp.dest('dev'));
 });
