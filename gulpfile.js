@@ -45,7 +45,9 @@ gulp.task('stylus', function() {
 gulp.task('pug', function() {
     return gulp.src('dev/pug/pages/*.pug')
         .pipe(plumber())
-        .pipe(pug())
+        .pipe(pug({
+            pretty: true
+        }))
         .on("error", notify.onError(function(error) {
             return "Message to the notifier: " + error.message;
         }))
