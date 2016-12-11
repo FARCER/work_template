@@ -23,8 +23,7 @@ gulp.task('stylus', function() {
         ])
         .pipe(plumber())
         .pipe(stylus({
-            'include css': true,
-            compress: true
+            'include css': true
         }))
 
 
@@ -32,9 +31,6 @@ gulp.task('stylus', function() {
             return "Message to the notifier: " + error.message;
         }))
         .pipe(autoprefixer(['last 2 version']))
-        .pipe(rename({
-            suffix: '.min'
-        }))
         .pipe(gulp.dest('dev/static/css'))
         .pipe(browsersync.reload({
             stream: true
@@ -67,14 +63,13 @@ gulp.task('browsersync', function() {
 gulp.task('scripts', function() {
     return gulp.src([
             // Библиотеки
-            'dev/static/libs/jquery/jquery.js',
             'dev/static/libs/magnific/jquery.magnific-popup.min.js',
             'dev/static/libs/bxslider/jquery.bxslider.min.js',
-            'dev/static/libs/validate/jquery.validate.min.js',
-            // Свои файлы
-            'dev/static/js/main.js'
+            'dev/static/libs/maskedinput/maskedinput.js',
+            'dev/static/libs/slick/slick.min.js',
+            'dev/static/libs/validate/jquery.validate.min.js'
         ])
-        .pipe(concat('scripts.min.js'))
+        .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dev/static/js'))
         .pipe(browsersync.reload({
@@ -113,7 +108,7 @@ gulp.task('watch', ['browsersync', 'stylus', 'scripts'], function() {
     gulp.watch('dev/static/stylus/**/*.styl', ['stylus']);
     gulp.watch('dev/pug/**/*.pug', ['pug']);
     gulp.watch('dev/*.html', browsersync.reload);
-    gulp.watch(['dev/static/js/*.js', '!dev/static/js/scripts.min.js*'], ['scripts']);
+    gulp.watch(['dev/static/js/*.js', '!dev/static/js/libs.min.js', '!dev/static/js/jquery.js'], ['scripts']);
 });
 
 // Очистка папки сборки
@@ -141,7 +136,7 @@ gulp.task('build', ['clean', 'img', 'stylus', 'scripts'], function() {
     var buildFonts = gulp.src('dev/static/fonts/**/*')
         .pipe(gulp.dest('product/static/fonts'));
 
-    var buildJs = gulp.src('dev/static/js/scripts.min.js')
+    var buildJs = gulp.src('dev/static/js/**.js')
         .pipe(gulp.dest('product/static/js'));
 
     var buildHtml = gulp.src('dev/*.html')
