@@ -2875,6 +2875,10 @@ img.mfp-img {
     color: black;
 }
 
+html {
+  line-height: 1;
+  font-size: 14px;
+}
 body {
   font-family: mainFont;
 }
@@ -2953,20 +2957,4 @@ button {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-}
-.test_block {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  text-align: center;
-}
-h1 {
-  font-size: 40px;
-  text-align: center;
-  transform: translateX(-50%);
-}
-h2 {
-  font-size: 30px;
-  text-align: center;
-  transform: translateX(-50%);
 }
